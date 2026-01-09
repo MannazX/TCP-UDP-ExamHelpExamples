@@ -12,14 +12,14 @@ serverSocket.listen(1) # Allows for 1 client to listen on server
 bikeList = []
 print("Server is ready to receive")
 
-certificateDIR = "C:\certificates" ## Directory where your certificate is located
-privateKeyPath = certificateDIR + "\key.pem"
-certificatePath = certificateDIR + "\certificate.pem"
-privateKeyPassword = input("Please enter your password:\n")
+certificateDIR = "C:\certificates" # Directory where your certificate is located
+privateKeyPath = certificateDIR + "\key.pem" # Path to the private key file
+certificatePath = certificateDIR + "\certificate.pem" # Path to the certificate fule
+privateKeyPassword = input("Please enter your password:\n") # Client password input
 
-context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) ## Secure server context
-context.load_cert_chain(certfile=certificatePath, keyfile=privateKeyPath, password=privateKeyPath)
-secureSocket = context.wrap_socket(serverSocket)
+context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) # Setup secure server context
+context.load_cert_chain(certfile=certificatePath, keyfile=privateKeyPath, password=privateKeyPath) # Context authentication
+secureSocket = context.wrap_socket(serverSocket) # Wrap socket with secure context
 
 # add: {"id":1,"brand":"Centurion","color":"Black","size":24}
 # all
@@ -155,4 +155,5 @@ while True:
     print(f"Connection established with {addr}") # Connection message with address
     threading.Thread(target=bikeService, args=(connectionSocket,)).start() # Starts thread for service via connection socket
     ## threading.Thread(target=jsonBikeService, args=(connectionSocket,)).start()
+
     break
